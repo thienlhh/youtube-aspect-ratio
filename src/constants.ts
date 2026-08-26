@@ -7,7 +7,7 @@ export const ASPECT_RATIO_OPTIONS: readonly AspectRatioOption[] = Object.freeze(
   Object.freeze({ label: "85% H", scale: ".85,1", title: "Scale horizontally to 85%" }),
   Object.freeze({ label: "85% V", scale: "1,.85", title: "Scale vertically to 85%" }),
   Object.freeze({ label: "93% H", scale: ".937,1", title: "Stretch 4:3 to 5:4" }),
-  Object.freeze({ label: "100%", scale: "1", title: "Original AR" }),
+  Object.freeze({ label: "100%", scale: "1", title: "Original" }),
   Object.freeze({ label: "104%", scale: "1.04", title: "Take WSS out of the picture" }),
   Object.freeze({ label: "106% H", scale: "1.066,1", title: "Stretch 5:4 to 4:3" }),
   Object.freeze({ label: "111%", scale: "1.111", title: "Zoom 16:10 to 16:9" }),
