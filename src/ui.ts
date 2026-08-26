@@ -1,11 +1,33 @@
 import {
-  ASPECT_RATIO_ICON_SVG,
   ASPECT_RATIO_OPTIONS,
   DEFAULT_OPTION,
   STATIC_CSS,
 } from "./constants";
 import { AspectRatioOption } from "./types";
 import { generateTransformCss } from "./utils";
+
+/**
+ * Creates SVG icon using standard DOM createElementNS to avoid innerHTML.
+ */
+function createAspectRatioIconSvg(): SVGSVGElement {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("height", "100%");
+  svg.setAttribute("version", "1.1");
+  svg.setAttribute("viewBox", "0 0 36 36");
+  svg.setAttribute("width", "100%");
+  svg.setAttribute("aria-hidden", "true");
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("class", "ytp-svg-fill");
+  path.setAttribute(
+    "d",
+    "M 7,11 C 5.9,11 5,11.9 5,13 L 5,23 C 5,24.1 5.9,25 7,25 L 29,25 C 30.1,25 31,24.1 31,23 L 31,13 C 31,11.9 30.1,11 29,11 Z M 29.2,22.8 L 6.8,22.8 C 6.5,22.8 6.3,22.6 6.3,22.3 L 6.3,13.7 C 6.3,13.4 6.5,13.2 6.8,13.2 L 29.2,13.2 C 29.5,13.2 29.7,13.4 29.7,13.7 L 29.7,22.3 C 29.7,22.6 29.5,22.8 29.2,22.8 Z M 12,18 L 15.5,14.5 L 15.5,16.8 L 20.5,16.8 L 20.5,14.5 L 24,18 L 20.5,21.5 L 20.5,19.2 L 15.5,19.2 L 15.5,21.5 Z"
+  );
+  path.setAttribute("fill", "#ffffff");
+
+  svg.appendChild(path);
+  return svg;
+}
 
 export class AspectRatioUI {
   private static readonly STATIC_STYLE_ID = "yt-aspect-ratio-static-css";
@@ -137,7 +159,7 @@ export class AspectRatioUI {
     button.setAttribute("type", "button");
     button.setAttribute("aria-haspopup", "true");
     button.setAttribute("aria-expanded", "false");
-    button.innerHTML = ASPECT_RATIO_ICON_SVG;
+    button.appendChild(createAspectRatioIconSvg());
 
     this.button = button;
     this.updateButtonContent(this.currentOption);
