@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Quality Gates (Chrome)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run compile
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build Chrome extension
+        run: npm run build
+
+      - name: Package Chrome extension ZIP
+        run: npm run zip
+
+      - name: Verify build artifacts
+        run: |
+          ls -la .output/
+          if [ ! -f .output/*-chrome.zip ]; then
+            echo "::error::Chrome extension ZIP not found in .output/"
+            exit 1
+          fi

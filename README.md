@@ -98,6 +98,15 @@ npm test
 
 ---
 
+## 🚀 Release & Store Publishing Automation
+
+Automated CI/CD workflows run via GitHub Actions:
+* **CI Quality Checks** on every pull request and push to `main` ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+* **GitHub Releases & Chrome Web Store Publishing** triggered automatically on Git version tags (e.g. `v1.0.1`) ([`.github/workflows/release.yml`](.github/workflows/release.yml)).
+* See [`.github/PUBLISHING.md`](.github/PUBLISHING.md) for full credentials setup and release instructions.
+
+---
+
 ## 📄 Privacy & Permissions
 
 Aspect Ratio Changer for YouTube™ strictly adheres to privacy-first principles:

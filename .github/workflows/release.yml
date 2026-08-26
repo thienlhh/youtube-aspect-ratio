@@ -1,0 +1,99 @@
+name: Release & Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (validate credentials without publishing to store)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build, Release & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run compile
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Package Chrome extension ZIP
+        run: npm run zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: .output/*-chrome.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+
+      - name: Publish to Chrome Web Store
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || 'iliinafimaknnhelpmjaochndmjlolla' }}
+          # API v2 Service Account Secrets
+          PUBLISHER_ID: ${{ secrets.CHROME_PUBLISHER_ID }}
+          SA_CLIENT_EMAIL: ${{ secrets.CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL }}
+          SA_PRIVATE_KEY: ${{ secrets.CHROME_SERVICE_ACCOUNT_PRIVATE_KEY }}
+          # API v1.1 OAuth Secrets
+          OAUTH_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          OAUTH_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+        run: |
+          CHROME_ZIP=$(ls .output/*-chrome.zip | head -n 1)
+          echo "Found extension package: $CHROME_ZIP"
+
+          EXTRA_FLAGS=""
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run mode active: validating credentials without submitting."
+            EXTRA_FLAGS="--dry-run"
+          fi
+
+          if [ -n "$PUBLISHER_ID" ] && [ -n "$SA_CLIENT_EMAIL" ] && [ -n "$SA_PRIVATE_KEY" ]; then
+            echo "Using Chrome Web Store API v2 (Service Account)..."
+            npx wxt submit \
+              --chrome-zip "$CHROME_ZIP" \
+              --chrome-extension-id "$EXTENSION_ID" \
+              --chrome-api-version v2 \
+              --chrome-publisher-id "$PUBLISHER_ID" \
+              --chrome-service-account-client-email "$SA_CLIENT_EMAIL" \
+              --chrome-service-account-private-key "$SA_PRIVATE_KEY" \
+              $EXTRA_FLAGS
+          elif [ -n "$OAUTH_CLIENT_ID" ] && [ -n "$OAUTH_CLIENT_SECRET" ] && [ -n "$OAUTH_REFRESH_TOKEN" ]; then
+            echo "Using Chrome Web Store API v1.1 (OAuth)..."
+            npx wxt submit \
+              --chrome-zip "$CHROME_ZIP" \
+              --chrome-extension-id "$EXTENSION_ID" \
+              --chrome-api-version v1.1 \
+              --chrome-client-id "$OAUTH_CLIENT_ID" \
+              --chrome-client-secret "$OAUTH_CLIENT_SECRET" \
+              --chrome-refresh-token "$OAUTH_REFRESH_TOKEN" \
+              $EXTRA_FLAGS
+          else
+            echo "::warning::Chrome Web Store secrets are not configured. Skipped store upload."
+            echo "See .github/PUBLISHING.md for instructions on configuring secrets."
+          fi
