@@ -79,6 +79,10 @@ export default defineContentScript({
       isScheduled = true;
       requestAnimationFrame(() => {
         isScheduled = false;
+        // Fast path: skip DOM traversal if button is already active in the document
+        if (uiInstance?.isMounted()) {
+          return;
+        }
         const rightControls = findRightControls();
         if (rightControls && !rightControls.querySelector(".ytp-arc-button")) {
           mountControls();
@@ -121,5 +125,10 @@ export default defineContentScript({
     window.addEventListener("yt-navigate-finish", tryMount);
     window.addEventListener("yt-navigate-start", tryMount);
     window.addEventListener("yt-page-data-updated", tryMount);
+
+    ctx.onInvalidated(() => {
+      observer?.disconnect();
+      observer = null;
+    });
   },
 });

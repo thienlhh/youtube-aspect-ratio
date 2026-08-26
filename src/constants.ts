@@ -112,6 +112,8 @@ export const STATIC_CSS = `
   color: #eee;
   transition: background-color 0.15s ease, color 0.15s ease;
   margin-bottom: 2px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .ytp-arc-list > li:last-child {

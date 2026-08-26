@@ -285,4 +285,8 @@ export class AspectRatioUI {
       this.currentPlayer = player;
     }
   }
+
+  public isMounted(): boolean {
+    return Boolean(this.button?.isConnected);
+  }
 }
