@@ -1,4 +1,4 @@
-import { AspectRatioOption } from "./types";
+import type { AspectRatioOption } from "./types";
 
 export const ASPECT_RATIO_OPTIONS: readonly AspectRatioOption[] = Object.freeze([
   Object.freeze({ label: "70% H", scale: ".703,1", title: "Stretch 16:9 to 5:4" }),

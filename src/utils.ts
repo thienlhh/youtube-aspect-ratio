@@ -30,7 +30,7 @@ export function sanitizeScaleValue(scaleValue: string): string {
 export function calculateMarginTop(scaleValue: string): number {
   const safeScale = sanitizeScaleValue(scaleValue);
   const parts = safeScale.split(",");
-  const verticalScaleStr = parts[parts.length - 1].trim();
+  const verticalScaleStr = (parts[parts.length - 1] ?? "1").trim();
   const verticalScale = parseFloat(verticalScaleStr);
   if (isNaN(verticalScale) || !Number.isFinite(verticalScale)) {
     return 0;

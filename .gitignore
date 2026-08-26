@@ -3,6 +3,8 @@ node_modules/
 
 # Build outputs
 dist/
+.output/
+.wxt/
 *.zip
 
 # OS & Editor files

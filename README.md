@@ -1,11 +1,12 @@
 # Aspect Ratio Changer for YouTube™
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-brightgreen.svg?style=flat-square)](manifest.json)
+[![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-brightgreen.svg?style=flat-square)](wxt.config.ts)
+[![WXT](https://img.shields.io/badge/Framework-WXT-purple.svg?style=flat-square)](https://wxt.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg?style=flat-square)](tsconfig.json)
 [![Build Status](https://img.shields.io/badge/Build-Passing-success.svg?style=flat-square)](package.json)
 
-A lightweight, zero-dependency Chrome Extension (Manifest V3) that allows you to easily adjust, zoom, and stretch video aspect ratios directly within the native YouTube player controls.
+A lightweight, zero-dependency browser extension (Manifest V3) built with [WXT](https://wxt.dev) that allows you to easily adjust, zoom, and stretch video aspect ratios directly within the native YouTube player controls.
 
 <p align="center">
   <img src="store-assets/screenshot-1-menu.jpg" width="850" alt="Aspect Ratio Changer for YouTube Menu Preview" />
@@ -23,7 +24,7 @@ A lightweight, zero-dependency Chrome Extension (Manifest V3) that allows you to
 - 🎨 **Modern Frosted Dark Glass UI**: Semi-transparent blurred dropdown menu matching YouTube's native design aesthetics.
 - ⌨️ **Keyboard Accessibility**: Full keyboard support (`Enter`, `Space`, `Escape`) and ARIA-compliant attributes.
 - 🔒 **100% Private & Local**: Zero data collection, zero network requests, zero telemetry.
-- 🚀 **Zero Runtime Dependencies**: Built with vanilla TypeScript and compiled into a single ultra-lightweight script (< 12 KB).
+- 🚀 **Ultra-lightweight**: Built with TypeScript and WXT, compiled into a single optimized script (< 16 KB).
 
 ---
 
@@ -50,34 +51,41 @@ npm install
 
 ### Available Scripts
 ```bash
-# Build production bundle (minified)
-npm run build
-
-# Build with sourcemaps for local debugging
+# Start development server with auto-reload and HMR
 npm run dev
 
-# Watch mode for rapid development
-npm run watch
+# Start development server for Firefox
+npm run dev:firefox
+
+# Build production bundle for Chrome (outputs to .output/chrome-mv3)
+npm run build
+
+# Build production bundle for Firefox (outputs to .output/firefox-mv2)
+npm run build:firefox
+
+# Package release zip for Chrome Web Store (outputs to .output/)
+npm run zip
+
+# Package release zip for Firefox Add-ons
+npm run zip:firefox
 
 # Run TypeScript type check
 npm run type-check
 
-# Run test suite
+# Run test suite with Vitest
 npm test
-
-# Generate clean Chrome Web Store release package (.zip)
-npm run package
 ```
 
 ---
 
 ## 📦 Loading Unpacked in Chrome (Local Testing)
 
-1. Open Google Chrome and navigate to `chrome://extensions/`.
-2. Enable **Developer mode** toggle in the top-right corner.
-3. Click **Load unpacked**.
-4. Select this project's root folder (`youtube-aspect-ratio`).
-5. Open any [YouTube](https://www.youtube.com) video and enjoy full aspect ratio control!
+1. Run `npm run build` (or `npm run dev`).
+2. Open Google Chrome and navigate to `chrome://extensions/`.
+3. Enable **Developer mode** toggle in the top-right corner.
+4. Click **Load unpacked**.
+5. Select the `.output/chrome-mv3` directory.
+6. Open any [YouTube](https://www.youtube.com) video and enjoy full aspect ratio control!
 
 ---
 

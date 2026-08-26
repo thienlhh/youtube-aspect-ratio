@@ -3,7 +3,7 @@ import {
   DEFAULT_OPTION,
   STATIC_CSS,
 } from "./constants";
-import { AspectRatioOption } from "./types";
+import type { AspectRatioOption } from "./types";
 import { generateTransformCss } from "./utils";
 
 /**
