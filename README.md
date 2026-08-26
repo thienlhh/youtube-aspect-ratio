@@ -1,5 +1,6 @@
 # Aspect Ratio Changer for YouTube™
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Available-blue?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/aspect-ratio-changer-for/iliinafimaknnhelpmjaochndmjlolla)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-brightgreen.svg?style=flat-square)](wxt.config.ts)
 [![WXT](https://img.shields.io/badge/Framework-WXT-purple.svg?style=flat-square)](https://wxt.dev)
@@ -11,6 +12,14 @@ A lightweight, zero-dependency browser extension (Manifest V3) built with [WXT](
 <p align="center">
   <img src="store-assets/screenshot-1-menu.jpg" width="850" alt="Aspect Ratio Changer for YouTube Menu Preview" />
 </p>
+
+---
+
+## 📥 Installation
+
+Install directly from the official store:
+
+👉 **[Download on Chrome Web Store](https://chromewebstore.google.com/detail/aspect-ratio-changer-for/iliinafimaknnhelpmjaochndmjlolla)**
 
 ---
 
