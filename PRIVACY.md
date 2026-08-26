@@ -22,5 +22,5 @@ The extension does not use third-party tracking, advertising, analytics, or remo
 
 ## 5. Contact
 If you have any questions about this Privacy Policy or the extension, please contact:
-- Email: thienlhh91@gmail.com
+- Email: kaoxofu@gmail.com
 - GitHub Issues: https://github.com/thienlhh/youtube-aspect-ratio/issues

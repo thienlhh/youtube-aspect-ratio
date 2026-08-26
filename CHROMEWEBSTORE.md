@@ -35,7 +35,7 @@ This extension does not collect, store, or transmit any user data, personal info
 SUPPORT
 Found an issue or have a feature request?
 • Open an issue on GitHub: https://github.com/thienlhh/youtube-aspect-ratio
-• Contact: thienlhh91@gmail.com
+• Contact: kaoxofu@gmail.com
 
 TRADEMARK DISCLAIMER
 YouTube is a trademark of Google LLC. This extension is an independent project and is not affiliated with, sponsored by, or endorsed by Google LLC or YouTube.
@@ -119,7 +119,7 @@ English
 ## Developer Info
 
 **Publisher Name**: Thien Le  
-**Contact Email**: thienlhh91@gmail.com  
+**Contact Email**: kaoxofu@gmail.com  
 **Support URL**: https://github.com/thienlhh/youtube-aspect-ratio/issues  
 
 ---
