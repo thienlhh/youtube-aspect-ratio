@@ -77,11 +77,10 @@ export class AspectRatioUI {
   private updateButtonContent(option: AspectRatioOption): void {
     if (!this.button) return;
 
-    this.button.title = `Aspect Ratio: ${option.label}${
-      option.title ? ` (${option.title})` : ""
-    }`;
+    const displayTitle = option.title || option.label;
+    this.button.title = `Aspect Ratio: ${displayTitle}`;
     this.button.setAttribute("data-scale", option.scale);
-    this.button.setAttribute("aria-label", `Aspect Ratio: ${option.label}`);
+    this.button.setAttribute("aria-label", `Aspect Ratio: ${displayTitle}`);
   }
 
   public selectOption(option: AspectRatioOption): void {
@@ -209,18 +208,8 @@ export class AspectRatioUI {
 
       const labelSpan = document.createElement("span");
       labelSpan.className = "ytp-arc-item-label";
-      labelSpan.textContent = option.label;
+      labelSpan.textContent = option.title || option.label;
       li.appendChild(labelSpan);
-
-      if (option.title) {
-        const descSpan = document.createElement("span");
-        descSpan.className = "ytp-arc-item-desc";
-        descSpan.style.fontSize = "11px";
-        descSpan.style.opacity = "0.6";
-        descSpan.style.marginLeft = "10px";
-        descSpan.textContent = option.title;
-        li.appendChild(descSpan);
-      }
 
       li.addEventListener("click", (e) => {
         e.stopPropagation();

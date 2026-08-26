@@ -102,7 +102,7 @@ export const STATIC_CSS = `
 .ytp-arc-list > li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   line-height: 1.4;
   padding: 6px 12px;
   border-radius: 8px;
