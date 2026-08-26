@@ -1,0 +1,20 @@
+{
+  "name": "youtube-aspect-ratio-changer",
+  "version": "1.0.0",
+  "description": "Allows changing the aspect ratio of YouTube videos.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/content.ts --bundle --outfile=dist/content.js --target=chrome110 --minify",
+    "dev": "esbuild src/content.ts --bundle --outfile=dist/content.js --target=chrome110 --sourcemap",
+    "watch": "esbuild src/content.ts --bundle --outfile=dist/content.js --target=chrome110 --watch",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.308",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  }
+}
