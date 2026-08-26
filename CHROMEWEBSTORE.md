@@ -56,8 +56,9 @@ English
 | Asset | Dimensions | Status | Filename / Notes |
 | :--- | :--- | :--- | :--- |
 | **Store Icon** [REQUIRED] | 128×128 PNG | ✅ Ready | `icons/icon128.png` |
-| **Screenshot 1** [REQUIRED] | 1280×800 or 640×400 | 🟡 Pending Capture | Player view showing the aspect ratio menu open |
-| **Screenshot 2** [RECOMMENDED] | 1280×800 or 640×400 | 🟡 Pending Capture | Before & After comparison (e.g. 4:3 stretched to 16:9) |
+| **Screenshot 1** [REQUIRED] | 1280×800 (16:9) | ✅ Ready | `store-assets/screenshot-1-menu.jpg` (Menu open) |
+| **Screenshot 2** [RECOMMENDED] | 1280×800 (16:9) | ✅ Ready | `store-assets/screenshot-2-before-after.jpg` (Before/After) |
+| **Screenshot 3** [RECOMMENDED] | 1280×800 (16:9) | ✅ Ready | `store-assets/screenshot-3-features.jpg` (Feature showcase) |
 | **Small Promo Tile** [RECOMMENDED] | 440×280 PNG | 🟡 Optional | Promotional graphic for featured store placements |
 | **Marquee Promo Tile** | 1400×560 PNG | 🟡 Optional | Large promotional banner |
 
