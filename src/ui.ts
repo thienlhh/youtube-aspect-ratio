@@ -88,14 +88,9 @@ export class AspectRatioUI {
     this.updateButtonContent(option);
 
     if (this.list) {
-      const items = this.list.querySelectorAll("li");
-      items.forEach((li) => {
-        if (li.getAttribute("data-scale") === option.scale) {
-          li.classList.add("active");
-        } else {
-          li.classList.remove("active");
-        }
-      });
+      for (const li of this.list.querySelectorAll("li")) {
+        li.classList.toggle("active", li.getAttribute("data-scale") === option.scale);
+      }
     }
 
     this.applyTransform(option.scale);
@@ -202,9 +197,7 @@ export class AspectRatioUI {
       if (option.title) {
         li.title = option.title;
       }
-      if (option.scale === this.currentOption.scale) {
-        li.classList.add("active");
-      }
+      li.classList.toggle("active", option.scale === this.currentOption.scale);
 
       const labelSpan = document.createElement("span");
       labelSpan.className = "ytp-arc-item-label";

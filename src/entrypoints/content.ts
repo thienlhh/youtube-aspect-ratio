@@ -16,35 +16,15 @@ export default defineContentScript({
     }
 
     function findRightControls(): HTMLElement | null {
-      // 1. Look within main movie player
-      const player = document.querySelector(
-        "#movie_player, .html5-video-player, ytd-watch-flexy"
+      return (
+        document.querySelector<HTMLElement>(
+          "#movie_player .ytp-right-controls, .html5-video-player .ytp-right-controls, .ytp-right-controls"
+        ) ??
+        document.querySelector<HTMLElement>(
+          ".ytp-settings-button, .ytp-size-button, .ytp-fullscreen-button, .ytp-miniplayer-button"
+        )?.parentElement ??
+        document.querySelector<HTMLElement>(".ytp-chrome-controls")
       );
-      if (player) {
-        const rc = player.querySelector(
-          ".ytp-right-controls"
-        ) as HTMLElement | null;
-        if (rc) return rc;
-      }
-
-      // 2. Global right-controls
-      const rc = document.querySelector(
-        ".ytp-right-controls"
-      ) as HTMLElement | null;
-      if (rc) return rc;
-
-      // 3. Fallback to parent of settings or fullscreen button
-      const siblingBtn = document.querySelector(
-        ".ytp-settings-button, .ytp-size-button, .ytp-fullscreen-button, .ytp-miniplayer-button"
-      );
-      if (siblingBtn && siblingBtn.parentElement) {
-        return siblingBtn.parentElement as HTMLElement;
-      }
-
-      // 4. Fallback to chrome controls
-      return document.querySelector(
-        ".ytp-chrome-controls"
-      ) as HTMLElement | null;
     }
 
     function mountControls(): boolean {
@@ -110,15 +90,16 @@ export default defineContentScript({
       }
     }
 
-    // Lifecycle listeners
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => {
-        tryMount();
-        setupObserver();
-      });
-    } else {
+    function init(): void {
       tryMount();
       setupObserver();
+    }
+
+    // Lifecycle listeners
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
     }
 
     window.addEventListener("load", tryMount);
