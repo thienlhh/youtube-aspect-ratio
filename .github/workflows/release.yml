@@ -54,45 +54,28 @@ jobs:
       - name: Publish to Chrome Web Store
         env:
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-          EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || 'iliinafimaknnhelpmjaochndmjlolla' }}
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || 'iliinafimaknnhelpmjaochndmjlolla' }}
           # API v2 Service Account Secrets
-          PUBLISHER_ID: ${{ secrets.CHROME_PUBLISHER_ID }}
-          SA_CLIENT_EMAIL: ${{ secrets.CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL }}
-          SA_PRIVATE_KEY: ${{ secrets.CHROME_SERVICE_ACCOUNT_PRIVATE_KEY }}
+          CHROME_PUBLISHER_ID: ${{ secrets.CHROME_PUBLISHER_ID }}
+          CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL }}
+          CHROME_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.CHROME_SERVICE_ACCOUNT_PRIVATE_KEY }}
           # API v1.1 OAuth Secrets
-          OAUTH_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
-          OAUTH_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
         run: |
           CHROME_ZIP=$(ls .output/*-chrome.zip | head -n 1)
+          export CHROME_ZIP
           echo "Found extension package: $CHROME_ZIP"
 
-          EXTRA_FLAGS=""
-          if [ "$DRY_RUN" = "true" ]; then
-            echo "Dry run mode active: validating credentials without submitting."
-            EXTRA_FLAGS="--dry-run"
-          fi
-
-          if [ -n "$PUBLISHER_ID" ] && [ -n "$SA_CLIENT_EMAIL" ] && [ -n "$SA_PRIVATE_KEY" ]; then
+          if [ -n "$CHROME_PUBLISHER_ID" ] && [ -n "$CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL" ] && [ -n "$CHROME_SERVICE_ACCOUNT_PRIVATE_KEY" ]; then
             echo "Using Chrome Web Store API v2 (Service Account)..."
-            npx wxt submit \
-              --chrome-zip "$CHROME_ZIP" \
-              --chrome-extension-id "$EXTENSION_ID" \
-              --chrome-api-version v2 \
-              --chrome-publisher-id "$PUBLISHER_ID" \
-              --chrome-service-account-client-email "$SA_CLIENT_EMAIL" \
-              --chrome-service-account-private-key "$SA_PRIVATE_KEY" \
-              $EXTRA_FLAGS
-          elif [ -n "$OAUTH_CLIENT_ID" ] && [ -n "$OAUTH_CLIENT_SECRET" ] && [ -n "$OAUTH_REFRESH_TOKEN" ]; then
+            export CHROME_API_VERSION="v2"
+            npx wxt submit
+          elif [ -n "$CHROME_CLIENT_ID" ] && [ -n "$CHROME_CLIENT_SECRET" ] && [ -n "$CHROME_REFRESH_TOKEN" ]; then
             echo "Using Chrome Web Store API v1.1 (OAuth)..."
-            npx wxt submit \
-              --chrome-zip "$CHROME_ZIP" \
-              --chrome-extension-id "$EXTENSION_ID" \
-              --chrome-api-version v1.1 \
-              --chrome-client-id "$OAUTH_CLIENT_ID" \
-              --chrome-client-secret "$OAUTH_CLIENT_SECRET" \
-              --chrome-refresh-token "$OAUTH_REFRESH_TOKEN" \
-              $EXTRA_FLAGS
+            export CHROME_API_VERSION="v1.1"
+            npx wxt submit
           else
             echo "::warning::Chrome Web Store secrets are not configured. Skipped store upload."
             echo "See .github/PUBLISHING.md for instructions on configuring secrets."
