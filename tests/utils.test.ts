@@ -69,11 +69,13 @@ describe("Aspect Ratio Security & Utility Tests", () => {
       expect(DEFAULT_OPTION).toBeDefined();
       expect(DEFAULT_OPTION.scale).toBe("1");
       expect(DEFAULT_OPTION.label).toBe("100%");
+      expect(DEFAULT_OPTION.title).toBe("Original (100%)");
     });
 
-    it("all presets have valid non-empty labels and scales", () => {
+    it("all presets have valid non-empty labels, titles, and scales", () => {
       for (const opt of ASPECT_RATIO_OPTIONS) {
         expect(opt.label.length).toBeGreaterThan(0);
+        expect(opt.title.length).toBeGreaterThan(0);
         expect(opt.scale.length).toBeGreaterThan(0);
         expect(Number.isFinite(calculateMarginTop(opt.scale))).toBe(true);
       }

@@ -25,10 +25,11 @@ Install directly from the official store:
 
 ## ✨ Features
 
-- 🎯 **21 Calibrated Presets**: Easily switch between standard, ultrawide, and custom aspect ratios:
-  - **Standard Ratios**: `100% (Original)`, `16:9`, `16:10`, `4:3`, `5:4`, `14:9`, `21:9`.
-  - **Horizontal / Vertical Stretches**: `70% H`, `75% H`, `75% V`, `85% H`, `85% V`, `93% H`, `106% H`, `111% V`, `125% V`, `133% H`, `133% V`, `142% H`, `142% V`.
-  - **Proportional Zooms**: `104% (WSS crop)`, `111%`, `114%`, `116%`, `125%`, `133%`, `142%`.
+- 🎯 **21 Calibrated Presets**: Easily adjust aspect ratio and zoom with direct scale controls:
+  - **Original**: `Original (100%)` (Reset to native video aspect ratio).
+  - **Horizontal Scales**: `Horizontal 70%`, `Horizontal 75%`, `Horizontal 85%`, `Horizontal 94%`, `Horizontal 107%`, `Horizontal 133%`, `Horizontal 142%`.
+  - **Vertical Scales**: `Vertical 75%`, `Vertical 85%`, `Vertical 111%`, `Vertical 125%`, `Vertical 133%`, `Vertical 142%`.
+  - **Proportional Zooms**: `Zoom 104%`, `Zoom 111%`, `Zoom 114%`, `Zoom 117%`, `Zoom 125%`, `Zoom 133%`, `Zoom 142%`.
 - ⚡ **Seamless Player Integration**: Embedded directly inside YouTube's bottom control bar beside the Settings menu.
 - 🎨 **Modern Frosted Dark Glass UI**: Semi-transparent blurred dropdown menu matching YouTube's native design aesthetics.
 - ⌨️ **Keyboard Accessibility**: Full keyboard support (`Enter`, `Space`, `Escape`) and ARIA-compliant attributes.
