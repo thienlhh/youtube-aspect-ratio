@@ -68,6 +68,22 @@ jobs:
           export CHROME_ZIP
           echo "Found extension package: $CHROME_ZIP"
 
+          # Normalize GCP service account private key (handles JSON string, quotes, or literal \n)
+          if [ -n "$CHROME_SERVICE_ACCOUNT_PRIVATE_KEY" ]; then
+            NORMALIZED_KEY=$(node -e '
+              let key = process.env.CHROME_SERVICE_ACCOUNT_PRIVATE_KEY || "";
+              if (key.trim().startsWith("{")) {
+                try {
+                  const json = JSON.parse(key);
+                  if (json.private_key) key = json.private_key;
+                } catch {}
+              }
+              key = key.replace(/^["'\''"]+|["'\''"]+$/g, "").replace(/\\n/g, "\n").trim();
+              process.stdout.write(key);
+            ')
+            export CHROME_SERVICE_ACCOUNT_PRIVATE_KEY="$NORMALIZED_KEY"
+          fi
+
           if [ -n "$CHROME_PUBLISHER_ID" ] && [ -n "$CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL" ] && [ -n "$CHROME_SERVICE_ACCOUNT_PRIVATE_KEY" ]; then
             echo "Using Chrome Web Store API v2 (Service Account)..."
             export CHROME_API_VERSION="v2"
