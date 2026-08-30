@@ -25,5 +25,5 @@ coverage/
 # Local cache / tooling & notes
 .code-review-graph/
 .agents/
-skills-lock.json
-CHROMEWEBSTORE.md
+.fallow/
+screenshot-generator/

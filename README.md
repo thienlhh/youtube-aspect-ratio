@@ -9,10 +9,6 @@
 
 A lightweight, zero-dependency browser extension (Manifest V3) built with [WXT](https://wxt.dev) that allows you to easily adjust, zoom, and stretch video aspect ratios directly within the native YouTube player controls.
 
-<p align="center">
-  <img src="store-assets/screenshot-1-menu.jpg" width="850" alt="Aspect Ratio Changer for YouTube Menu Preview" />
-</p>
-
 ---
 
 ## 📥 Installation
@@ -35,14 +31,6 @@ Install directly from the official store:
 - ⌨️ **Keyboard Accessibility**: Full keyboard support (`Enter`, `Space`, `Escape`) and ARIA-compliant attributes.
 - 🔒 **100% Private & Local**: Zero data collection, zero network requests, zero telemetry.
 - 🚀 **Ultra-lightweight**: Built with TypeScript and WXT, compiled into a single optimized script (< 16 KB).
-
----
-
-## 📸 Screenshots
-
-| Feature Menu | Before & After Comparison |
-| :---: | :---: |
-| <img src="store-assets/screenshot-1-menu.jpg" width="420" alt="Menu" /> | <img src="store-assets/screenshot-2-before-after.jpg" width="420" alt="Comparison" /> |
 
 ---
 

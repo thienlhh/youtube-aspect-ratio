@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "chrome-extensions": {
+      "source": "googlechrome/modern-web-guidance",
+      "sourceType": "github",
+      "skillPath": "skills/chrome-extensions/SKILL.md",
+      "computedHash": "1e8525bb49647008dcd3a6b7e5d3c3207345f086e7a64d7e6d5bcc67dbba7a71"
+    },
+    "chrome-store-screenshots": {
+      "source": "jrbayguade/chrome-store-screenshots",
+      "sourceType": "github",
+      "skillPath": "skills/chrome-store-screenshots/SKILL.md",
+      "computedHash": "3af71285dc6a442704ac378e32743b90c2876d7737bbc8aa3eb472d278c62978"
+    },
+    "wxt-browser-extensions": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "skillPath": "skills/.experimental/wxt-browser-extensions/SKILL.md",
+      "computedHash": "3cb5453d026a8a223bc3d788bd5ddb0dae230a39508ae002a66cbce67a8f0e96"
+    }
+  }
+}
